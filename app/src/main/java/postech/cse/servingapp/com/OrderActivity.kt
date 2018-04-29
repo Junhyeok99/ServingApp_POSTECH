@@ -26,7 +26,9 @@ import postech.cse.servingapp.com.utilities.MenuJSONUtils
 import postech.cse.servingapp.com.utilities.NetworkUtils
 
 class OrderActivity : AppCompatActivity(), MenuListAdapter.MenuOnClickListener {
-
+    companion object{
+        var present_screen: OrderActivity? = null
+    }
     private var total: Int = 0
     private var mRecyclerView: RecyclerView? = null
     private var mMenuListAdapter: MenuListAdapter? = null
@@ -59,6 +61,7 @@ class OrderActivity : AppCompatActivity(), MenuListAdapter.MenuOnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order)
 
+        present_screen = this
         mLoadingIndicator = findViewById(R.id.pg_menu_list) as ProgressBar
         total_textview = findViewById(R.id.tv_total) as TextView
 

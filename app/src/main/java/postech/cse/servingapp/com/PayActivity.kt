@@ -1,9 +1,11 @@
 package postech.cse.servingapp.com
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import postech.cse.servingapp.com.adapter.OrderListAdapter
@@ -11,6 +13,9 @@ import postech.cse.servingapp.com.listdata.StoreMenu
 import postech.cse.servingapp.com.utilities.NetworkUtils
 
 class PayActivity : AppCompatActivity() {
+    companion object {
+        var present_screen: PayActivity? = null
+    }
     private var OrderList: Array<StoreMenu>? = null
     private var mRecyclerView: RecyclerView? = null
     private var mOrderListAdapter: OrderListAdapter? = null
@@ -20,6 +25,8 @@ class PayActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_receipt)
+
+        present_screen = this
         total_textview = findViewById(R.id.tv_total) as TextView
         OrderList = intent.getSerializableExtra("OrderList") as Array<StoreMenu>
 
@@ -54,5 +61,19 @@ class PayActivity : AppCompatActivity() {
         total_textview!!.text = total.toString()
 
         NetworkUtils.buildUrl(newOrderList)
+    }
+
+    fun cash_button_click(v: View){
+        var sendURL = NetworkUtils.buildUrl(mOrderListAdapter!!.getOrderListData())
+        //var result = NetworkUtils.getResponseFromHttpUrl(sendURL)
+
+        var intent = Intent(this, CompleteActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun naming_button_click(v: View){
+        var intent = Intent(this, NameActivity::class.java)
+        intent.putExtra("OrderList", mOrderListAdapter!!.getOrderListData())
+        startActivity(intent)
     }
 }

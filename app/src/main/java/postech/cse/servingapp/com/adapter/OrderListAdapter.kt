@@ -46,7 +46,7 @@ class OrderListAdapter: RecyclerView.Adapter<OrderListAdapter.OrderListAdapterVi
         }
     }
 
-    fun getMenuListData(): Array<StoreMenu>? {
+    fun getOrderListData(): Array<StoreMenu>? {
         return mOrderData
     }
 
