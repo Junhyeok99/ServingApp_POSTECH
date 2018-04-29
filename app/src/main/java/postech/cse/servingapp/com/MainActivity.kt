@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val navigationView = findViewById(R.id.nav_view) as NavigationView
         navigationView.setNavigationItemSelectedListener(this)
+
+        replace_fragment(MainFragment())
     }
 
     override fun onBackPressed() {
@@ -51,16 +53,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(intent)
         } else if (id == R.id.Menu_Home) {
             //open main fragment? screen?
+            fragment = MainFragment()
         }
 
         if(fragment != null){
-            val fm = supportFragmentManager.beginTransaction()
-            fm.replace(R.id.frameLayout, fragment)
-            fm.commit()
+            replace_fragment(fragment)
         }
 
         val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
         drawer.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    fun replace_fragment(fragment: Fragment){
+        val fm = supportFragmentManager.beginTransaction()
+        fm.replace(R.id.frameLayout, fragment)
+        fm.commit()
     }
 }
