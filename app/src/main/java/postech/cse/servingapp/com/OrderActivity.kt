@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import com.android.volley.AuthFailureError
@@ -27,6 +28,8 @@ class OrderActivity : AppCompatActivity(), MenuListAdapter.MenuOnClickListener {
     private var total: Int = 0
     private var mRecyclerView: RecyclerView? = null
     private var mMenuListAdapter: MenuListAdapter? = null
+    private var mLoadingIndicator: ProgressBar? = null
+
     private var total_textview: TextView? = null
 
     override fun onUpPositionClicked(position: Int) {
@@ -53,6 +56,8 @@ class OrderActivity : AppCompatActivity(), MenuListAdapter.MenuOnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order)
+
+        mLoadingIndicator = findViewById(R.id.pg_menu_list) as ProgressBar
         total_textview = findViewById(R.id.tv_total) as TextView
         total_textview!!.text = total.toString()
 
@@ -107,6 +112,10 @@ class OrderActivity : AppCompatActivity(), MenuListAdapter.MenuOnClickListener {
 
     inner class FetchMenuDataTask: AsyncTask<Void, Void, Array<Menu>>() {
 
+        override fun onPreExecute() {
+            super.onPreExecute()
+            mLoadingIndicator!!.visibility = View.VISIBLE
+        }
         override fun doInBackground(vararg p0: Void?): Array<Menu>? {
             val menuRequestURL = NetworkUtils.buildUrl()
 
@@ -122,6 +131,7 @@ class OrderActivity : AppCompatActivity(), MenuListAdapter.MenuOnClickListener {
         }
 
         override fun onPostExecute(result: Array<Menu>?) {
+            mLoadingIndicator!!.visibility = View.INVISIBLE
             if(result != null)
                 mMenuListAdapter!!.setMenuListData(result)
         }
