@@ -13,26 +13,27 @@
         <TextView
             android:id="@+id/tv_menu_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:paddingStart="5dp"
-            android:text="@string/name" />
+            android:text="@string/name"
+            android:gravity="left|center"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_menu_price"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="right"
-            android:paddingEnd="10dp"
-            android:text="@string/cost" />
+            android:gravity="right|center"
+            android:paddingEnd="5dp"
+            android:text="@string/cost"
+
+            android:textSize="20sp" />
 
         <ImageButton
             android:id="@+id/bt_up"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:adjustViewBounds="true"
             android:background="@drawable/ic_add_box_black_24dp"
             android:contentDescription="@string/plus"
@@ -40,8 +41,8 @@
 
         <ImageButton
             android:id="@+id/bt_down"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:adjustViewBounds="true"
             android:background="@drawable/ic_indeterminate_check_box_black_24dp"
             android:contentDescription="@string/minus"
@@ -50,10 +51,11 @@
 
         <TextView
             android:id="@+id/tv_menu_num"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:gravity="center_horizontal"
-            android:text="@string/num" />
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|center"
+            android:paddingEnd="5dp"
+            android:text="@string/num"
+            android:textSize="20sp" />
     </LinearLayout>
 </LinearLayout>
