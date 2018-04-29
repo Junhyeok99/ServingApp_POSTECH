@@ -73,39 +73,6 @@ class OrderActivity : AppCompatActivity(), MenuListAdapter.MenuOnClickListener {
         FetchMenuDataTask().execute()
     }
 
-    fun update_menu_data(){
-        val stringRequest = object : StringRequest(Request.Method.POST, "http://sjin9805.cafe24.com/postech/menu_get_data.php", //php파일 접속
-                Response.Listener<String> { response ->
-                    try {
-                        var storelist: Array<StoreMenu>? = null
-
-                        val array = JSONArray(response)
-                        storelist = Array<StoreMenu>(array.length(), { StoreMenu("", 0, 0) })
-
-                        for(i in 0 until storelist.size){
-                            val menu = array.getJSONObject(i)
-                            storelist[i].name = menu.getString("name")
-                            storelist[i].price = menu.getInt("price")
-                            storelist[i].selled = menu.getInt("selled")
-                        }
-
-                        mMenuListAdapter!!.setMenuListData(storelist)
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                    }
-                },
-                Response.ErrorListener{}){
-            @Throws(AuthFailureError::class)
-            override fun getParams(): Map<String, String> {
-                val params = HashMap<String, String>()
-                return params
-            }
-        }
-
-
-        Volley.newRequestQueue(this).add(stringRequest)
-    }
-
     fun pay_button_click(v : View){
         val intent = Intent(this, PayActivity::class.java)
         intent.putExtra("OrderList", mMenuListAdapter!!.getMenuListData())
