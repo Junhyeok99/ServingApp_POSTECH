@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -19,7 +21,7 @@ import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import postech.cse.servingapp.com.adapter.MenuListAdapter
-import postech.cse.servingapp.com.listdata.Menu
+import postech.cse.servingapp.com.listdata.StoreMenu
 import postech.cse.servingapp.com.utilities.MenuJSONUtils
 import postech.cse.servingapp.com.utilities.NetworkUtils
 
@@ -76,10 +78,10 @@ class OrderActivity : AppCompatActivity(), MenuListAdapter.MenuOnClickListener {
         val stringRequest = object : StringRequest(Request.Method.POST, "http://sjin9805.cafe24.com/postech/menu_get_data.php", //php파일 접속
                 Response.Listener<String> { response ->
                     try {
-                        var storelist: Array<Menu>? = null
+                        var storelist: Array<StoreMenu>? = null
 
                         val array = JSONArray(response)
-                        storelist = Array<Menu>(array.length(), {Menu("", 0, 0)})
+                        storelist = Array<StoreMenu>(array.length(), { StoreMenu("", 0, 0) })
 
                         for(i in 0 until storelist.size){
                             val menu = array.getJSONObject(i)
@@ -110,13 +112,13 @@ class OrderActivity : AppCompatActivity(), MenuListAdapter.MenuOnClickListener {
         startActivity(intent)
     }
 
-    inner class FetchMenuDataTask: AsyncTask<Void, Void, Array<Menu>>() {
+    inner class FetchMenuDataTask: AsyncTask<Void, Void, Array<StoreMenu>>() {
 
         override fun onPreExecute() {
             super.onPreExecute()
             mLoadingIndicator!!.visibility = View.VISIBLE
         }
-        override fun doInBackground(vararg p0: Void?): Array<Menu>? {
+        override fun doInBackground(vararg p0: Void?): Array<StoreMenu>? {
             val menuRequestURL = NetworkUtils.buildUrl()
 
             try {
@@ -130,11 +132,30 @@ class OrderActivity : AppCompatActivity(), MenuListAdapter.MenuOnClickListener {
             }
         }
 
-        override fun onPostExecute(result: Array<Menu>?) {
+        override fun onPostExecute(result: Array<StoreMenu>?) {
             mLoadingIndicator!!.visibility = View.INVISIBLE
             if(result != null)
                 mMenuListAdapter!!.setMenuListData(result)
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
+        val inflater = menuInflater
+        /* Use the inflater's inflate method to inflate our menu layout to this menu */
+        inflater.inflate(R.menu.order_menu, menu)
+        /* Return true so that the menu is displayed in the Toolbar */
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+
+        if (id == R.id.action_refresh) {
+            FetchMenuDataTask().execute()
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
 }

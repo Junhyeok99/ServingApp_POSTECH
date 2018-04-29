@@ -3,15 +3,15 @@ package postech.cse.servingapp.com.utilities
 import android.content.Context
 import org.json.JSONArray
 import org.json.JSONObject
-import postech.cse.servingapp.com.listdata.Menu
+import postech.cse.servingapp.com.listdata.StoreMenu
 
 object MenuJSONUtils {
 
-    fun getMenuDataFromJSON(context: Context, menuJSONstr: String?): Array<Menu>?{
-        var ret: Array<Menu>? = null
+    fun getMenuDataFromJSON(context: Context, menuJSONstr: String?): Array<StoreMenu>?{
+        var ret: Array<StoreMenu>? = null
 
         val menudataArray = JSONArray(menuJSONstr)
-        ret = Array<Menu>(menudataArray.length(), {Menu("", 0, 0)})
+        ret = Array<StoreMenu>(menudataArray.length(), {StoreMenu("", 0, 0)})
 
         for(i in 0 until menudataArray.length()){
             val menudata = menudataArray.getJSONObject(i)

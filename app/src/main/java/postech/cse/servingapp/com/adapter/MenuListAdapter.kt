@@ -9,13 +9,13 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import postech.cse.servingapp.com.R
-import postech.cse.servingapp.com.listdata.Menu
+import postech.cse.servingapp.com.listdata.StoreMenu
 import java.lang.ref.WeakReference
 
 class MenuListAdapter(private val mClickHandler: MenuListAdapter.MenuOnClickListener)
     : RecyclerView.Adapter<MenuListAdapter.MenuListAdapterViewHolder>() {
 
-    private var mMenuData : Array<Menu>? = null
+    private var mMenuData : Array<StoreMenu>? = null
 
     interface MenuOnClickListener {
         fun onUpPositionClicked(position: Int)
@@ -76,11 +76,11 @@ class MenuListAdapter(private val mClickHandler: MenuListAdapter.MenuOnClickList
         }
     }
 
-    fun getMenuListData(): Array<Menu>? {
+    fun getMenuListData(): Array<StoreMenu>? {
         return mMenuData
     }
 
-    fun setMenuListData(menuData: Array<Menu>?){
+    fun setMenuListData(menuData: Array<StoreMenu>?){
         mMenuData = menuData
         notifyDataSetChanged()
     }
