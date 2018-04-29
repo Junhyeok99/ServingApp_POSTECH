@@ -20,4 +20,7 @@
     <string name="table_no">Table no.</string>
     <string name="Cash">현금</string>
     <string name="Naming">이름달기</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
