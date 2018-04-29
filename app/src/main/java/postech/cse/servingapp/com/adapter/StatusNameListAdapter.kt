@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import postech.cse.servingapp.com.listdata.Name
 
-class StatusNameListAdapter : RecyclerView.Adapter<StatusNameListAdapter.StatusNameListAdapterViewHolder>(){
+/*class StatusNameListAdapter : RecyclerView.Adapter<StatusNameListAdapter.StatusNameListAdapterViewHolder>(){
     val mStatusNameData : Array<Name>? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatusNameListAdapterViewHolder {
 
@@ -22,4 +22,4 @@ class StatusNameListAdapter : RecyclerView.Adapter<StatusNameListAdapter.StatusN
     inner class StatusNameListAdapterViewHolder(v : View) : RecyclerView.ViewHolder(v){
 
     }
-}
+}*/
