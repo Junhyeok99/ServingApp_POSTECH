@@ -52,6 +52,26 @@ object NetworkUtils {
         return url
     }
 
+    fun buildUrl(input: Array<StoreMenu>?, customer: String?, buyer: String?): URL? {
+        var builtUri = Uri.parse(ORDER_BASE_URL).buildUpon()
+
+        for(i in 0 until input!!.size){
+            builtUri = builtUri.appendQueryParameter(input[i].name, input[i].selled.toString())
+        }
+        builtUri = builtUri.appendQueryParameter("customer", customer).appendQueryParameter("buyer", buyer)
+        
+        var url: URL? = null
+        try {
+            url = URL(builtUri.build().toString())
+        } catch (e: MalformedURLException) {
+            e.printStackTrace()
+        }
+        Log.v(TAG, "Built URI " + url!!)
+
+        return url
+    }
+
+
     @Throws(IOException::class)
     fun getResponseFromHttpUrl(url: URL?): String? {
         val urlConnection = url?.openConnection() as HttpURLConnection

@@ -49,8 +49,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             //open new screen for order
             var intent = Intent(this, OrderActivity::class.java)
             startActivity(intent)
-        } else if (id == R.id.Menu_Logout) {
-            //open login fragment? screen?
+        } else if (id == R.id.Menu_Home) {
+            //open main fragment? screen?
         }
 
         if(fragment != null){
