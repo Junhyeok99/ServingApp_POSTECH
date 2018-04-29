@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import postech.cse.servingapp.com.R
 import postech.cse.servingapp.com.listdata.Menu
@@ -36,15 +37,15 @@ class MenuListAdapter : RecyclerView.Adapter<MenuListAdapter.MenuListAdapterView
     inner class MenuListAdapterViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val mMenuName : TextView
         val mMenuPrice : TextView
-        val mMenuUpButton : Button
-        val mMenuDownButton : Button
+        val mMenuUpButton : ImageButton
+        val mMenuDownButton : ImageButton
         val mMenuNum : TextView
 
         init {
             mMenuName = v.findViewById(R.id.tv_menu_name) as TextView
             mMenuPrice = v.findViewById(R.id.tv_menu_price) as TextView
-            mMenuUpButton = v.findViewById(R.id.bt_up) as Button
-            mMenuDownButton = v.findViewById(R.id.bt_down) as Button
+            mMenuUpButton = v.findViewById(R.id.bt_up) as ImageButton
+            mMenuDownButton = v.findViewById(R.id.bt_down) as ImageButton
             mMenuNum = v.findViewById(R.id.tv_menu_num) as TextView
         }
     }
