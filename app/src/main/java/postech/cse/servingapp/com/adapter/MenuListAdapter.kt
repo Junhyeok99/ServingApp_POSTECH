@@ -7,11 +7,20 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import postech.cse.servingapp.com.R
 import postech.cse.servingapp.com.listdata.Menu
+import java.lang.ref.WeakReference
 
-class MenuListAdapter : RecyclerView.Adapter<MenuListAdapter.MenuListAdapterViewHolder>() {
+class MenuListAdapter(private val mClickHandler: MenuListAdapter.MenuOnClickListener)
+    : RecyclerView.Adapter<MenuListAdapter.MenuListAdapterViewHolder>() {
+
     private var mMenuData : Array<Menu>? = null
+
+    interface MenuOnClickListener {
+        fun onUpPositionClicked(position: Int)
+        fun onDownPositionClicked(position: Int)
+    }
 
     override fun getItemCount(): Int {
         return if (null == mMenuData) 0 else mMenuData!!.size
@@ -21,7 +30,7 @@ class MenuListAdapter : RecyclerView.Adapter<MenuListAdapter.MenuListAdapterView
         val thisMenuItem = mMenuData!![position]
         holder.mMenuName.text = thisMenuItem.name
         holder.mMenuPrice.text = thisMenuItem.price.toString()
-        holder.mMenuNum.text = "0"
+        holder.mMenuNum.text = thisMenuItem.selled.toString()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuListAdapterViewHolder {
@@ -31,15 +40,28 @@ class MenuListAdapter : RecyclerView.Adapter<MenuListAdapter.MenuListAdapterView
         val shouldAttachToParentImmediately = false
 
         val view = inflater.inflate(layoutIdForListItem, parent, shouldAttachToParentImmediately)
-        return MenuListAdapterViewHolder(view)
+        return MenuListAdapterViewHolder(view, mClickHandler)
     }
 
-    inner class MenuListAdapterViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+    inner class MenuListAdapterViewHolder(v: View, listener: MenuOnClickListener) : RecyclerView.ViewHolder(v), View.OnClickListener {
+
+        val listenerRef: WeakReference<MenuOnClickListener>
         val mMenuName : TextView
         val mMenuPrice : TextView
         val mMenuUpButton : ImageButton
         val mMenuDownButton : ImageButton
         val mMenuNum : TextView
+
+        override fun onClick(v: View) {
+            if(v.id == mMenuUpButton.id){
+                Toast.makeText(v.context, "up button", Toast.LENGTH_LONG)
+                listenerRef.get()!!.onUpPositionClicked(adapterPosition)
+            }
+            else if(v.id == mMenuDownButton.id){
+                Toast.makeText(v.context, "down button", Toast.LENGTH_LONG)
+                listenerRef.get()!!.onDownPositionClicked(adapterPosition)
+            }
+        }
 
         init {
             mMenuName = v.findViewById(R.id.tv_menu_name) as TextView
@@ -47,7 +69,15 @@ class MenuListAdapter : RecyclerView.Adapter<MenuListAdapter.MenuListAdapterView
             mMenuUpButton = v.findViewById(R.id.bt_up) as ImageButton
             mMenuDownButton = v.findViewById(R.id.bt_down) as ImageButton
             mMenuNum = v.findViewById(R.id.tv_menu_num) as TextView
+
+            listenerRef = WeakReference<MenuOnClickListener>(listener)
+            mMenuUpButton.setOnClickListener(this)
+            mMenuDownButton.setOnClickListener(this)
         }
+    }
+
+    fun getMenuListData(): Array<Menu>? {
+        return mMenuData
     }
 
     fun setMenuListData(menuData: Array<Menu>?){

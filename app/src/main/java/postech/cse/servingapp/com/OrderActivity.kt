@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
@@ -20,17 +22,42 @@ import postech.cse.servingapp.com.listdata.Menu
 import postech.cse.servingapp.com.utilities.MenuJSONUtils
 import postech.cse.servingapp.com.utilities.NetworkUtils
 
-class OrderActivity : AppCompatActivity() {
+class OrderActivity : AppCompatActivity(), MenuListAdapter.MenuOnClickListener {
 
+    private var total: Int = 0
     private var mRecyclerView: RecyclerView? = null
     private var mMenuListAdapter: MenuListAdapter? = null
+    private var total_textview: TextView? = null
+
+    override fun onUpPositionClicked(position: Int) {
+        changeTotal(position, 1)
+    }
+
+    override fun onDownPositionClicked(position: Int) {
+        changeTotal(position, -1)
+    }
+
+    fun changeTotal(position: Int, multiply: Int){
+        var updateMenuArray = mMenuListAdapter!!.getMenuListData()
+        updateMenuArray!![position].selled += multiply
+
+        if(updateMenuArray!![position].selled >= 0){
+            total += updateMenuArray!![position].price * multiply
+            total_textview!!.text = total.toString()
+            mMenuListAdapter!!.setMenuListData(updateMenuArray)
+        }
+        else
+            updateMenuArray!![position].selled = 0
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order)
+        total_textview = findViewById(R.id.tv_total) as TextView
+        total_textview!!.text = total.toString()
 
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mMenuListAdapter = MenuListAdapter()
+        mMenuListAdapter = MenuListAdapter(this)
         mRecyclerView = findViewById(R.id.list_menu) as RecyclerView
         mRecyclerView!!.layoutManager = layoutManager
         mRecyclerView!!.setHasFixedSize(true)
@@ -73,6 +100,11 @@ class OrderActivity : AppCompatActivity() {
         Volley.newRequestQueue(this).add(stringRequest)
     }
 
+    fun pay_button_click(v : View){
+        val intent = Intent(this, PayActivity::class.java)
+        startActivity(intent)
+    }
+
     inner class FetchMenuDataTask: AsyncTask<Void, Void, Array<Menu>>() {
 
         override fun doInBackground(vararg p0: Void?): Array<Menu>? {
@@ -81,7 +113,7 @@ class OrderActivity : AppCompatActivity() {
             try {
                 val menudataResponse = NetworkUtils.getResponseFromHttpUrl(menuRequestURL)
 
-                return MenuJSONUtils.getMenuDataFronJSON(this@OrderActivity, menudataResponse)
+                return MenuJSONUtils.getMenuDataFromJSON(this@OrderActivity, menudataResponse)
             }
             catch (e: Exception){
                 e.printStackTrace()

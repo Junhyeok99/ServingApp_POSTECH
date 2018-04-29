@@ -7,7 +7,7 @@ import postech.cse.servingapp.com.listdata.Menu
 
 object MenuJSONUtils {
 
-    fun getMenuDataFronJSON(context: Context, menuJSONstr: String?): Array<Menu>?{
+    fun getMenuDataFromJSON(context: Context, menuJSONstr: String?): Array<Menu>?{
         var ret: Array<Menu>? = null
 
         val menudataArray = JSONArray(menuJSONstr)
@@ -18,7 +18,7 @@ object MenuJSONUtils {
 
             ret[i].name = menudata.getString("name")
             ret[i].price = menudata.getInt("price")
-            ret[i].selled = menudata.getInt("selled")
+            ret[i].selled = 0//menudata.getInt("selled")
         }
 
         return ret
