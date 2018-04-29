@@ -7,7 +7,7 @@
     tools:context=".OrderActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/list_menu"
+        android:id="@+id/list_receipt"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"

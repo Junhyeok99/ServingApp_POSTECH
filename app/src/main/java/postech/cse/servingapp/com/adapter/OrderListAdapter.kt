@@ -13,19 +13,19 @@ class OrderListAdapter: RecyclerView.Adapter<OrderListAdapter.OrderListAdapterVi
     private var mOrderData : Array<StoreMenu>? = null
 
     override fun getItemCount(): Int {
-        return if (null == mMenuData) 0 else mMenuData!!.size
+        return if (null == mOrderData) 0 else mOrderData!!.size
     }
 
     override fun onBindViewHolder(holder: OrderListAdapterViewHolder, position: Int) {
         val thisMenuItem = mOrderData!![position]
-        holder.mMenuName.text = thisMenuItem.name
-        holder.mMenuPrice.text = thisMenuItem.price.toString()
-        holder.mMenuNum.text = thisMenuItem.selled.toString()
+        holder.mOrderName.text = thisMenuItem.name
+        holder.mOrderPrice.text = thisMenuItem.price.toString()
+        holder.mOrderNum.text = thisMenuItem.selled.toString()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderListAdapterViewHolder {
         val context = parent.context
-        val layoutIdForListItem = R.layout.menu_list_item
+        val layoutIdForListItem = R.layout.menu_receipt_item
         val inflater = LayoutInflater.from(context)
         val shouldAttachToParentImmediately = false
 
@@ -35,14 +35,14 @@ class OrderListAdapter: RecyclerView.Adapter<OrderListAdapter.OrderListAdapterVi
 
     inner class OrderListAdapterViewHolder(v: View) : RecyclerView.ViewHolder(v) {
 
-        val mMenuName: TextView
-        val mMenuPrice: TextView
-        val mMenuNum: TextView
+        val mOrderName: TextView
+        val mOrderPrice: TextView
+        val mOrderNum: TextView
 
         init {
-            mMenuName = v.findViewById(R.id.tv_menu_name) as TextView
-            mMenuPrice = v.findViewById(R.id.tv_menu_price) as TextView
-            mMenuNum = v.findViewById(R.id.tv_menu_num) as TextView
+            mOrderName = v.findViewById(R.id.tv_menu_name_receipt) as TextView
+            mOrderPrice = v.findViewById(R.id.tv_menu_price_receipt) as TextView
+            mOrderNum = v.findViewById(R.id.tv_menu_num_receipt) as TextView
         }
     }
 
