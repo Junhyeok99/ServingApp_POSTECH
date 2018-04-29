@@ -6,8 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".LoginActivity"
-    style="@style/Theme.Transparent"
-    >
+    style="@style/Theme.Transparent">
 
     <LinearLayout
         android:layout_width="match_parent"
