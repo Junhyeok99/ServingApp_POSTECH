@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 
 /*class StatusMenuListAdapter : RecyclerView.Adapter<StatusMenuListAdapter.StatusMenuListAdapterViewHolder>(){
-    val mStatusMenuData : Array<Menu>? = null
+    val mStatusMenuData : Array<StoreMenu>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatusMenuListAdapterViewHolder {
 
