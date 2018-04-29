@@ -61,7 +61,6 @@ class OrderActivity : AppCompatActivity(), MenuListAdapter.MenuOnClickListener {
 
         mLoadingIndicator = findViewById(R.id.pg_menu_list) as ProgressBar
         total_textview = findViewById(R.id.tv_total) as TextView
-        total_textview!!.text = total.toString()
 
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mMenuListAdapter = MenuListAdapter(this)
@@ -109,6 +108,7 @@ class OrderActivity : AppCompatActivity(), MenuListAdapter.MenuOnClickListener {
 
     fun pay_button_click(v : View){
         val intent = Intent(this, PayActivity::class.java)
+        intent.putExtra("OrderList", mMenuListAdapter!!.getMenuListData())
         startActivity(intent)
     }
 
@@ -134,8 +134,11 @@ class OrderActivity : AppCompatActivity(), MenuListAdapter.MenuOnClickListener {
 
         override fun onPostExecute(result: Array<StoreMenu>?) {
             mLoadingIndicator!!.visibility = View.INVISIBLE
-            if(result != null)
+            if(result != null) {
                 mMenuListAdapter!!.setMenuListData(result)
+                total = 0
+                total_textview!!.text = "0"
+            }
         }
     }
 
