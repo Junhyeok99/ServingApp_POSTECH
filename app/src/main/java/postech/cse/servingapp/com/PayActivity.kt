@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import postech.cse.servingapp.com.adapter.OrderListAdapter
 import postech.cse.servingapp.com.listdata.StoreMenu
+import postech.cse.servingapp.com.utilities.NetworkUtils
 
 class PayActivity : AppCompatActivity() {
     private var OrderList: Array<StoreMenu>? = null
@@ -51,5 +52,7 @@ class PayActivity : AppCompatActivity() {
 
         mOrderListAdapter!!.setOrderListData(newOrderList)
         total_textview!!.text = total.toString()
+
+        NetworkUtils.buildUrl(newOrderList)
     }
 }

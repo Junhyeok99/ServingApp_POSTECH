@@ -2,6 +2,7 @@ package postech.cse.servingapp.com.utilities
 
 import android.net.Uri
 import android.util.Log
+import postech.cse.servingapp.com.listdata.StoreMenu
 
 import java.io.IOException
 import java.net.HttpURLConnection
@@ -16,6 +17,7 @@ object NetworkUtils {
 
     private val TAG = NetworkUtils::class.java!!.getSimpleName()
     private val MENU_BASE_URL = "http://sjin9805.cafe24.com/postech/menu_get_data.php"
+    private val ORDER_BASE_URL = "http://sjin9805.cafe24.com/postech/order_set_data.php"
 
     fun buildUrl(): URL? {
         val builtUri = Uri.parse(MENU_BASE_URL).buildUpon()
@@ -24,6 +26,24 @@ object NetworkUtils {
         var url: URL? = null
         try {
             url = URL(builtUri.toString())
+        } catch (e: MalformedURLException) {
+            e.printStackTrace()
+        }
+        Log.v(TAG, "Built URI " + url!!)
+
+        return url
+    }
+
+    fun buildUrl(input: Array<StoreMenu>?): URL? {
+        var builtUri = Uri.parse(ORDER_BASE_URL).buildUpon()
+
+        for(i in 0 until input!!.size){
+            builtUri = builtUri.appendQueryParameter(input[i].name, input[i].selled.toString())
+        }
+
+        var url: URL? = null
+        try {
+            url = URL(builtUri.build().toString())
         } catch (e: MalformedURLException) {
             e.printStackTrace()
         }
