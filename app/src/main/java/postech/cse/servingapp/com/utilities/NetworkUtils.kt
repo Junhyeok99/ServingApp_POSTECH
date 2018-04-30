@@ -34,12 +34,14 @@ object NetworkUtils {
         return url
     }
 
-    fun buildUrl(input: Array<StoreMenu>?): URL? {
+    fun buildUrl(input: Array<StoreMenu>?, table_num: Int, total: Int): URL? {
         var builtUri = Uri.parse(ORDER_BASE_URL).buildUpon()
 
         for(i in 0 until input!!.size){
             builtUri = builtUri.appendQueryParameter(input[i].name, input[i].selled.toString())
         }
+        builtUri = builtUri.appendQueryParameter("tablenum", table_num.toString())
+        builtUri = builtUri.appendQueryParameter("total", total.toString())
 
         var url: URL? = null
         try {
@@ -47,18 +49,20 @@ object NetworkUtils {
         } catch (e: MalformedURLException) {
             e.printStackTrace()
         }
+
         Log.v(TAG, "Built URI " + url!!)
 
         return url
     }
 
-    fun buildUrl(input: Array<StoreMenu>?, customer: String?, buyer: String?): URL? {
+    fun buildUrl(input: Array<StoreMenu>?, customer: String?, buyer: String?, table_num: Int): URL? {
         var builtUri = Uri.parse(ORDER_BASE_URL).buildUpon()
 
         for(i in 0 until input!!.size){
             builtUri = builtUri.appendQueryParameter(input[i].name, input[i].selled.toString())
         }
-        builtUri = builtUri.appendQueryParameter("customer", customer).appendQueryParameter("buyer", buyer)
+        builtUri = builtUri.appendQueryParameter("tablenum", table_num.toString())
+        builtUri = builtUri.appendQueryParameter("customername", customer).appendQueryParameter("buyername", buyer)
         
         var url: URL? = null
         try {

@@ -28,7 +28,7 @@ class NameActivity : AppCompatActivity() {
         var customername = customerEditText!!.text.toString()
         var buyername = customerEditText!!.text.toString()
 
-        var sendURL = NetworkUtils.buildUrl(OrderList, customername, buyername)
+        //var sendURL = NetworkUtils.buildUrl(OrderList, customername, buyername)
         //var result = NetworkUtils.getResponseFromHttpUrl(sendURL)
 
         var intent = Intent(this, CompleteActivity::class.java)
