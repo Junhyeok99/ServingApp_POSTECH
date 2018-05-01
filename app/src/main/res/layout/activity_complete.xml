@@ -7,10 +7,11 @@
     tools:context=".CompleteActivity">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/img_complete"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="Check"
+        android:onClick="complete_button_click"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,7 +19,7 @@
         app:srcCompat="@mipmap/ic_launcher_foreground" />
 
     <ProgressBar
-        android:id="@+id/progressBar2"
+        android:id="@+id/pb_complete"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -61,11 +61,15 @@ class PayActivity : AppCompatActivity() {
             }
         }
 
-        override fun onPostExecute(result: Int) {
-            Toast.makeText(applicationContext, result.toString(), Toast.LENGTH_SHORT).show()
-            var intent = Intent(applicationContext, CompleteActivity::class.java)
-            intent.putExtra("tablenum", table_num!!.text.toString())
-            startActivity(intent)
+        override fun onPostExecute(result: Int?) {
+            if(result == 1) {
+                var intent = Intent(applicationContext, CompleteActivity::class.java)
+                intent.putExtra("tablenum", Integer.parseInt(table_num!!.text.toString()))
+                startActivity(intent)
+                finish()
+            }
+            else
+                Toast.makeText(applicationContext, "Error occured. Please try again", Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -98,6 +102,8 @@ class PayActivity : AppCompatActivity() {
     fun naming_button_click(v: View){
         var intent = Intent(this, NameActivity::class.java)
         intent.putExtra("OrderList", mOrderListAdapter!!.getOrderListData())
+        intent.putExtra("tablenum", Integer.parseInt(table_num!!.text.toString()))
+        intent.putExtra("total", total)
         startActivity(intent)
     }
 }

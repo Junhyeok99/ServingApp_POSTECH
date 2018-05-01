@@ -18,6 +18,7 @@ object NetworkUtils {
     private val TAG = NetworkUtils::class.java!!.getSimpleName()
     private val MENU_BASE_URL = "http://sjin9805.cafe24.com/postech/menu_get_data.php"
     private val ORDER_BASE_URL = "http://sjin9805.cafe24.com/postech/order_set_data.php"
+    private val ORDER_CHECK_URL = "http://sjin9805.cafe24.com/postech/check_order_data.php"
 
     fun buildUrl(): URL? {
         val builtUri = Uri.parse(MENU_BASE_URL).buildUpon()
@@ -29,6 +30,22 @@ object NetworkUtils {
         } catch (e: MalformedURLException) {
             e.printStackTrace()
         }
+        Log.v(TAG, "Built URI " + url!!)
+
+        return url
+    }
+
+    fun buildUrl(table_num: Int): URL?{
+        var builtUri = Uri.parse(ORDER_CHECK_URL).buildUpon()
+        builtUri = builtUri.appendQueryParameter("tablenum", table_num.toString())
+
+        var url: URL? = null
+        try {
+            url = URL(builtUri.build().toString())
+        } catch (e: MalformedURLException) {
+            e.printStackTrace()
+        }
+
         Log.v(TAG, "Built URI " + url!!)
 
         return url
@@ -55,7 +72,7 @@ object NetworkUtils {
         return url
     }
 
-    fun buildUrl(input: Array<StoreMenu>?, customer: String?, buyer: String?, table_num: Int): URL? {
+    fun buildUrl(input: Array<StoreMenu>?, customer: String?, buyer: String?, table_num: Int, total: Int): URL? {
         var builtUri = Uri.parse(ORDER_BASE_URL).buildUpon()
 
         for(i in 0 until input!!.size){
@@ -63,7 +80,8 @@ object NetworkUtils {
         }
         builtUri = builtUri.appendQueryParameter("tablenum", table_num.toString())
         builtUri = builtUri.appendQueryParameter("customername", customer).appendQueryParameter("buyername", buyer)
-        
+        builtUri = builtUri.appendQueryParameter("total", total.toString())
+
         var url: URL? = null
         try {
             url = URL(builtUri.build().toString())
