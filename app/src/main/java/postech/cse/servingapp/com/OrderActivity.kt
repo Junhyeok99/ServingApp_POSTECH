@@ -89,12 +89,12 @@ class OrderActivity : AppCompatActivity(), MenuListAdapter.MenuOnClickListener {
             mLoadingIndicator!!.visibility = View.VISIBLE
         }
         override fun doInBackground(vararg p0: Void?): Array<StoreMenu>? {
-            val menuRequestURL = NetworkUtils.buildUrl()
+            val menuRequestURL = NetworkUtils.buildUrl(true)
 
             try {
                 val menudataResponse = NetworkUtils.getResponseFromHttpUrl(menuRequestURL)
 
-                return MenuJSONUtils.getMenuDataFromJSON(this@OrderActivity, menudataResponse)
+                return MenuJSONUtils.getMenuDataFromJSON(menudataResponse)
             }
             catch (e: Exception){
                 e.printStackTrace()

@@ -7,7 +7,7 @@ import postech.cse.servingapp.com.listdata.StoreMenu
 
 object MenuJSONUtils {
 
-    fun getMenuDataFromJSON(context: Context, menuJSONstr: String?): Array<StoreMenu>?{
+    fun getMenuDataFromJSON(menuJSONstr: String?): Array<StoreMenu>?{
         var ret: Array<StoreMenu>? = null
 
         val menudataArray = JSONArray(menuJSONstr)

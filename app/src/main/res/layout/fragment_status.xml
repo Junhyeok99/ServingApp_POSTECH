@@ -19,6 +19,7 @@
             android:text="@string/Cost_rank" />
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp">
@@ -38,6 +39,7 @@
             android:text="@string/Menu_rank" />
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_menu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp" />
