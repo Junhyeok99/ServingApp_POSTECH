@@ -17,12 +17,32 @@ object NetworkUtils {
 
     private val TAG = NetworkUtils::class.java!!.getSimpleName()
     private val MENU_BASE_URL = "http://sjin9805.cafe24.com/postech/menu_get_data.php"
+    private val STATUS_MENU_BASE_URL = "http://sjin9805.cafe24.com/postech/menu_status_get_data.php"
+    private val NAME_STATUS_BASE_URL = "http://sjin9805.cafe24.com/postech/name_status_get_data.php"
     private val ORDER_BASE_URL = "http://sjin9805.cafe24.com/postech/order_set_data.php"
     private val ORDER_CHECK_URL = "http://sjin9805.cafe24.com/postech/check_order_data.php"
 
-    fun buildUrl(): URL? {
-        val builtUri = Uri.parse(MENU_BASE_URL).buildUpon()
-                .build()
+    fun name_buildUrl(): URL? {
+        val builtUri: Uri
+        builtUri = Uri.parse(NAME_STATUS_BASE_URL).buildUpon().build()
+
+        var url: URL? = null
+        try {
+            url = URL(builtUri.toString())
+        } catch (e: MalformedURLException) {
+            e.printStackTrace()
+        }
+        Log.v(TAG, "Built URI " + url!!)
+
+        return url
+    }
+
+    fun buildUrl(check: Boolean): URL? {
+        val builtUri: Uri
+        if(check)
+            builtUri = Uri.parse(MENU_BASE_URL).buildUpon().build()
+        else
+            builtUri = Uri.parse(STATUS_MENU_BASE_URL).buildUpon().build()
 
         var url: URL? = null
         try {

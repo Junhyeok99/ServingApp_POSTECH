@@ -34,7 +34,7 @@ class NameActivity : AppCompatActivity() {
     inner class PushNamePayOrderDataTask: AsyncTask<Void, Void, Int>(){
         override fun doInBackground(vararg p0: Void?): Int {
             var customername = customerEditText!!.text.toString()
-            var buyername = customerEditText!!.text.toString()
+            var buyername = buyerEditText!!.text.toString()
 
             var sendURL = NetworkUtils.buildUrl(OrderList, customername, buyername, table_num, total)
 
