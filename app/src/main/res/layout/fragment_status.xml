@@ -16,13 +16,16 @@
             android:id="@+id/Rank_naming"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Cost_rank" />
+            android:text="@string/Cost_rank"
+            android:textSize="20sp"
+            android:background="@color/colorRed"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            >
 
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
@@ -36,7 +39,9 @@
             android:id="@+id/Rank_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Menu_rank" />
+            android:text="@string/Menu_rank"
+            android:textSize="20sp"
+            android:background="@color/colorRed"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_menu"

@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorNULL">#ffffff</color>
     <color name="colorLogin">#e0e0e0</color>
+    <color name="colorRed">#ff0015</color>
 </resources>
