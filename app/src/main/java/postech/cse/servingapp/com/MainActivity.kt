@@ -65,6 +65,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
+
     fun replace_fragment(fragment: Fragment){
         val fm = supportFragmentManager.beginTransaction()
         fm.replace(R.id.frameLayout, fragment)
