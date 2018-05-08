@@ -17,8 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Cost_rank"
+            android:textColor="@color/colorNULL"
+            android:textStyle="bold"
             android:textSize="20sp"
-            android:background="@color/colorRed"/>
+            android:background="@color/colorStatus"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_name"
@@ -40,8 +42,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Menu_rank"
+            android:textStyle="bold"
+            android:textColor="@color/colorNULL"
             android:textSize="20sp"
-            android:background="@color/colorRed"/>
+            android:background="@color/colorStatus"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_menu"

@@ -13,6 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/colorRed"
             android:text="1"
             android:textSize="16sp" />
 
@@ -23,6 +24,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDark"
             android:text="TextView" />
 
         <TextView

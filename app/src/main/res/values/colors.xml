@@ -6,4 +6,5 @@
     <color name="colorNULL">#ffffff</color>
     <color name="colorLogin">#e0e0e0</color>
     <color name="colorRed">#ff0015</color>
+    <color name="colorStatus">#78909c</color>
 </resources>
