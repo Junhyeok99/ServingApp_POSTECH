@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import postech.cse.servingapp.com.adapter.OrderListAdapter
+import postech.cse.servingapp.com.listdata.Order
 import postech.cse.servingapp.com.listdata.StoreMenu
 import postech.cse.servingapp.com.utilities.NetworkUtils
 import postech.cse.servingapp.com.utilities.OrderJSONUtils
@@ -22,12 +23,14 @@ class PayActivity : AppCompatActivity() {
     companion object {
         var present_screen: PayActivity? = null
     }
-    private var OrderList: Array<StoreMenu>? = null
+
+    private var MenuList: Array<StoreMenu>? = null
     private var mRecyclerView: RecyclerView? = null
     private var mOrderListAdapter: OrderListAdapter? = null
     private var total: Int = 0
     private var total_textview: TextView? = null
     private var table_num: TextInputEditText? = null
+    private var mCustomerName: EditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +39,9 @@ class PayActivity : AppCompatActivity() {
         present_screen = this
         table_num = findViewById(R.id.et_table_num) as TextInputEditText
         total_textview = findViewById(R.id.tv_total) as TextView
-        OrderList = intent.getSerializableExtra("OrderList") as Array<StoreMenu>
+        mCustomerName = findViewById(R.id.et_customername) as EditText
+
+        MenuList = intent.getSerializableExtra("OrderList") as Array<StoreMenu>
 
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mRecyclerView = findViewById(R.id.list_receipt) as RecyclerView
@@ -50,15 +55,23 @@ class PayActivity : AppCompatActivity() {
 
     inner class PushOrderDataTask: AsyncTask<Void, Void, Int>(){
         override fun doInBackground(vararg p0: Void?): Int {
-            var sendURL = NetworkUtils.buildUrl(mOrderListAdapter!!.getOrderListData(), Integer.parseInt(table_num!!.text.toString()), 0)
-            try{
-                var result = NetworkUtils.getResponseFromHttpUrl(sendURL)
-                return OrderJSONUtils.getOrderDataFromJSON(applicationContext, result)
+            var OrderList = mOrderListAdapter!!.getOrderListData()
+            for(i in 0 until OrderList!!.size){
+                var newOrder = OrderList[i]
+                var sendURL = NetworkUtils.buildUrl(newOrder, table_num!!.text.toString(), mCustomerName!!.text.toString())
+
+                try{
+                    var result = NetworkUtils.getResponseFromHttpUrl(sendURL)
+                    if(OrderJSONUtils.getOrderDataFromJSON(applicationContext, result) != 1)
+                        return -1
+                }
+                catch(e: Exception){
+                    e.printStackTrace()
+                    return -1
+                }
             }
-            catch(e: Exception){
-                e.printStackTrace()
-                return -1
-            }
+
+            return 1
         }
 
         override fun onPostExecute(result: Int?) {
@@ -75,20 +88,23 @@ class PayActivity : AppCompatActivity() {
     }
 
     fun update_order_data(){
-        var count: Int = 0
+        var count = 0
 
-        for(i in 0 until OrderList!!.size){
-            if(OrderList!![i].selled != 0) {
+        for(i in 0 until MenuList!!.size){
+            if(MenuList!![i].selled != 0) {
                 count++
-                total += OrderList!![i].price * OrderList!![i].selled
+                total += MenuList!![i].price * MenuList!![i].selled
             }
         }
 
-        var newOrderList = Array<StoreMenu>(count, {StoreMenu("", 0, 0)})
+        var newOrderList = Array<Order>(count, {Order("", 0, 0, total, "현금")})
         count = 0
-        for(i in 0 until OrderList!!.size){
-            if(OrderList!![i].selled != 0)
-                newOrderList[count++] = OrderList!![i]
+        for(i in 0 until MenuList!!.size){
+            if(MenuList!![i].selled != 0) {
+                newOrderList[count].menu = MenuList!![i].name
+                newOrderList[count].count = MenuList!![i].selled
+                newOrderList[count++].price = MenuList!![i].price
+            }
         }
 
         mOrderListAdapter!!.setOrderListData(newOrderList)
@@ -97,13 +113,5 @@ class PayActivity : AppCompatActivity() {
 
     fun cash_button_click(v: View){
         PushOrderDataTask().execute()
-    }
-
-    fun naming_button_click(v: View){
-        var intent = Intent(this, NameActivity::class.java)
-        intent.putExtra("OrderList", mOrderListAdapter!!.getOrderListData())
-        intent.putExtra("tablenum", Integer.parseInt(table_num!!.text.toString()))
-        intent.putExtra("total", total)
-        startActivity(intent)
     }
 }

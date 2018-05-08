@@ -2,6 +2,7 @@ package postech.cse.servingapp.com.utilities
 
 import android.net.Uri
 import android.util.Log
+import postech.cse.servingapp.com.listdata.Order
 import postech.cse.servingapp.com.listdata.StoreMenu
 
 import java.io.IOException
@@ -71,14 +72,15 @@ object NetworkUtils {
         return url
     }
 
-    fun buildUrl(input: Array<StoreMenu>?, table_num: Int, total: Int): URL? {
+    fun buildUrl(input: Order, table_num: String, customername: String): URL? {
         var builtUri = Uri.parse(ORDER_BASE_URL).buildUpon()
 
-        for(i in 0 until input!!.size){
-            builtUri = builtUri.appendQueryParameter(input[i].name, input[i].selled.toString())
-        }
-        builtUri = builtUri.appendQueryParameter("tablenum", table_num.toString())
-        builtUri = builtUri.appendQueryParameter("total", total.toString())
+        builtUri = builtUri.appendQueryParameter("menu", input.menu)
+        builtUri = builtUri.appendQueryParameter("count", input.count.toString())
+        builtUri = builtUri.appendQueryParameter("tablenum", table_num)
+        builtUri = builtUri.appendQueryParameter("total", input.total.toString())
+        builtUri = builtUri.appendQueryParameter("buyername", input.buyername)
+        builtUri = builtUri.appendQueryParameter("customername", customername)
 
         var url: URL? = null
         try {

@@ -8,10 +8,5 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/main_image"
-        android:src="@drawable/main_image" />
+
 </FrameLayout>
