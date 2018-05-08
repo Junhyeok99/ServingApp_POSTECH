@@ -31,4 +31,6 @@
     <string name="main_image">main_image</string>
     <string name="cse_ordering_application">CSE Ordering Application</string>
     <string name="navigation_header_image">Navigation_header_image</string>
+    <string name="Total">총액</string>
+    <string name="ordering_by">Ordered by(주문한 사람)</string>
 </resources>
