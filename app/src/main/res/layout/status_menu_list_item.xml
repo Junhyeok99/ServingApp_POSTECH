@@ -10,7 +10,7 @@
 
         <TextView
             android:id="@+id/tv_menu_status_order"
-            android:layout_width="match_parent"
+            android:layout_width="15dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/colorRed"
@@ -19,7 +19,7 @@
 
         <TextView
             android:id="@+id/tv_menu_status_name"
-            android:layout_width="match_parent"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
@@ -29,7 +29,7 @@
 
         <TextView
             android:id="@+id/tv_menu_status_selled"
-            android:layout_width="match_parent"
+            android:layout_width="15dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="right"

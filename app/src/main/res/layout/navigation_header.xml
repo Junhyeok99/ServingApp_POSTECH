@@ -11,6 +11,15 @@
         android:layout_height="130dp"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/ic_restaurant_menu_black_24dp"/>
+        android:background="@drawable/ic_restaurant_menu_black_24dp"
+        android:contentDescription="@string/navigation_header_image" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/Copyright" />
 
 </LinearLayout>

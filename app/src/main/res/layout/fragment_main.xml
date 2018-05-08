@@ -19,13 +19,24 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="top|center"
         android:background="@drawable/text_back_white"
         android:gravity="center"
         android:text="@string/cse_ordering_application"
         android:textColor="@color/colorNULL"
+        android:layout_marginTop="110dp"
         android:textSize="30sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_gravity="end|bottom"
+        android:textColor="@color/colorNULL"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="Made by Cho.S.H\nDesign by Jung.J.H\n" />
 </FrameLayout>
