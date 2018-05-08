@@ -18,7 +18,7 @@ object MenuJSONUtils {
 
             ret[i].name = menudata.getString("name")
             ret[i].price = menudata.getInt("price")
-            ret[i].selled = 0//menudata.getInt("selled")
+            ret[i].selled = menudata.getInt("selled")
         }
 
         return ret

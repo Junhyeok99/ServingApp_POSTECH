@@ -97,12 +97,13 @@ class PayActivity : AppCompatActivity() {
             }
         }
 
-        var newOrderList = Array<Order>(count, {Order("", 0, 0, total, "현금")})
+        var newOrderList = Array<Order>(count, {Order("", 0, 0, 0, "현금")})
         count = 0
         for(i in 0 until MenuList!!.size){
             if(MenuList!![i].selled != 0) {
                 newOrderList[count].menu = MenuList!![i].name
                 newOrderList[count].count = MenuList!![i].selled
+                newOrderList[count].total = MenuList!![i].selled * MenuList!![i].price
                 newOrderList[count++].price = MenuList!![i].price
             }
         }
