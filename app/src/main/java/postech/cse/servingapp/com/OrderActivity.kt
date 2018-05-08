@@ -105,6 +105,9 @@ class OrderActivity : AppCompatActivity(), MenuListAdapter.MenuOnClickListener {
         override fun onPostExecute(result: Array<StoreMenu>?) {
             mLoadingIndicator!!.visibility = View.INVISIBLE
             if(result != null) {
+                for(i in 0 until result.size){
+                    result[i].selled = 0
+                }
                 mMenuListAdapter!!.setMenuListData(result)
                 total = 0
                 total_textview!!.text = "0"
