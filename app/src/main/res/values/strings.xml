@@ -28,4 +28,5 @@
     <string name="check">Check</string>
     <string name="complete">Complete</string>
     <string name="main_image">main_image</string>
+    <string name="cse_ordering_application">CSE Ordering Application</string>
 </resources>

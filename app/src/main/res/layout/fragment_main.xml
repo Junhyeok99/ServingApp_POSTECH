@@ -13,5 +13,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/main_image"
-        android:src="@drawable/main_image" />
+        android:src="@drawable/main_image"
+        android:background="@drawable/image_back_red"
+        android:adjustViewBounds="true"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/text_back_white"
+        android:gravity="center"
+        android:text="@string/cse_ordering_application"
+        android:textColor="@color/colorNULL"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 </FrameLayout>
