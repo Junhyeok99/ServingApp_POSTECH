@@ -22,7 +22,9 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".CompleteActivity" />
         <activity android:name=".OrderActivity" />
-        <activity android:name=".PayActivity" />
+        <activity
+            android:name=".PayActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".NameActivity"></activity>
     </application>
 

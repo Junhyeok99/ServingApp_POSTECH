@@ -12,6 +12,8 @@
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
+        android:focusableInTouchMode="true"
+        android:descendantFocusability="beforeDescendants"
         app:layout_constraintBottom_toTopOf="@+id/tv_total"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,23 +40,8 @@
         android:onClick="cash_button_click"
         android:text="@string/Cash"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/bt_cancel"
-        app:layout_constraintHorizontal_bias="0.558"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_menu"
-        app:layout_constraintVertical_bias="0.602" />
-
-    <Button
-        android:id="@+id/bt_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginTop="8dp"
-        android:onClick="naming_button_click"
-        android:text="@string/Naming"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list_menu"
         app:layout_constraintVertical_bias="0.602" />
 
@@ -78,4 +65,19 @@
             android:layout_height="match_parent"
             android:hint="@string/table_no" />
     </android.support.design.widget.TextInputLayout>
+
+    <EditText
+        android:id="@+id/et_customername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/bt_pay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_total" />
 </android.support.constraint.ConstraintLayout>
